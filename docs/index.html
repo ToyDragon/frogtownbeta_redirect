@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Frogtown - Redirect</title>
+  </head>
+  <body>
+    <div>The "beta" version of frogtown was removed, redirecting you to <a href="#">www.frogtown.me</a></div>
+    <script>
+      const publicId = document.cookie
+            .split(';')
+            .map((a) => ({key: a.split('=')[0].trim(), value: a.split('=')[1].trim()}))
+            .filter((a) => a.key === 'publicId')[0].value;
+      let url = 'https://www.frogtown.me/';
+      if (publicId) {
+        url += '?legacyBetaPublicId=' + publicId;
+      }
+      document.querySelector('a').setAttribute('href', url);
+      setTimeout(function() {
+        window.location.replace(url);
+      }, 2000);
+    </script>
+  </body>
+</html>
